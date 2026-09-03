@@ -6,7 +6,7 @@
 <title>智慧好嘉 HAOCHIA — TL Rebase</title>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
 <link href="css/style.css" rel="stylesheet"/>
-<link href="css/v44-2-fix.css" rel="stylesheet"/>
+<link href="css/v45-master.css" rel="stylesheet"/>
 <link href="../shared/guide.css" rel="stylesheet"/>
 </head>
 <body class="is-loading">
@@ -77,6 +77,50 @@ if(pending===0)revealAndInit();else{imgs.forEach(function(img){if(img.complete)c
 </script>
 <div id="guide-ui"><div class="guide-reading-overlays" aria-hidden="true"><img class="guide-overlay guide-overlay-top" src="../shared/assets/guide-overlay-top.svg" alt=""/><img class="guide-overlay guide-overlay-bottom" src="../shared/assets/guide-overlay-bottom.svg" alt=""/></div><button class="guide-launch" type="button"><span>▶</span><b>好嘉帶你讀</b></button><aside aria-hidden="true" class="guide-player"><div class="guide-video-wrap"><video id="guideVideo" playsinline="" poster="../shared/assets/haochia-wip-poster.jpg" preload="metadata"><source src="../shared/assets/haochia-wip.mp4" type="video/mp4"/></video></div><div class="guide-meta"><div><small>HAOCHIA GUIDE</small><strong id="guideTitle">智慧好嘉</strong></div><button aria-label="關閉" class="guide-close" type="button">×</button></div><div class="guide-caption" id="guideCaption"></div><div aria-label="導讀進度" class="guide-progress" role="slider"><i></i></div><div class="guide-controls"><button class="guide-play" type="button">暫停</button><button class="guide-follow" hidden="" type="button">▶ 繼續跟著好嘉導覽</button><button class="guide-restart" type="button">重新播放</button><button aria-pressed="false" class="guide-loop" type="button">循環播放</button></div></aside></div><script>window.HAOCHIA_GUIDE_CONFIG={defaultLand:.25,cues:[{t:0,target:"intro",land:.25,title:"智慧好嘉・循環生態系"},{t:9,target:"smart",land:.25,title:"智慧牧場・精準餵養"},{t:37,target:"cycle",land:.25,title:"資源循環・農牧共好"},{t:63,target:"partner",land:.25,title:"永續共好的推行者"},{t:75,target:"cta",land:.25,title:"關注智慧好嘉"}],targets:{intro:".sec1-copy",smart:"#smart-farm .sec-title",cycle:"#cycle .sec-title",partner:"#sustainability .sec-title",cta:"#action .sec4-illustration",footer:"#footer"}};</script><script src="../shared/guide.js"></script>
 <script>(function(){var mq=window.matchMedia('(min-width: 768px)');function syncView(e){if((e.matches!==undefined?e.matches:mq.matches)){window.location.replace('../web/index.html'+window.location.search+window.location.hash);}}if(mq.matches)syncView(mq);if(mq.addEventListener)mq.addEventListener('change',syncView);else mq.addListener(syncView);})();</script>
-<script>(function(){var DESIGN_WIDTH=430;var page=document.querySelector('.page');if(!page)return;function applyMobileScale(){var vw=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);if(vw<=DESIGN_WIDTH){var scale=vw/DESIGN_WIDTH;page.style.width=DESIGN_WIDTH+'px';page.style.maxWidth='none';page.style.transformOrigin='top center';page.style.transform='scale('+scale+')';document.body.style.minHeight=(page.scrollHeight*scale)+'px';}else{page.style.width='';page.style.maxWidth='';page.style.transformOrigin='';page.style.transform='';document.body.style.minHeight='';}}window.addEventListener('load',applyMobileScale,{once:false});window.addEventListener('resize',applyMobileScale);window.addEventListener('orientationchange',applyMobileScale);requestAnimationFrame(applyMobileScale);})();</script>
+<script>
+(function(){
+  var DESIGN_WIDTH=430;
+  var page=document.querySelector('.page');
+  if(!page)return;
+  var supportsZoom=!!(window.CSS&&CSS.supports&&CSS.supports('zoom','1'));
+
+  function applyMobileMasterScale(){
+    var vw=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);
+    var scale=Math.min(1,vw/DESIGN_WIDTH);
+    var left=vw>DESIGN_WIDTH?(vw-DESIGN_WIDTH)/2:0;
+
+    page.style.width=DESIGN_WIDTH+'px';
+    page.style.minWidth=DESIGN_WIDTH+'px';
+    page.style.maxWidth=DESIGN_WIDTH+'px';
+    page.style.margin='0';
+    page.style.transformOrigin='top left';
+
+    if(supportsZoom){
+      page.style.left=left+'px';
+      page.style.zoom=String(scale);
+      page.style.transform='none';
+    }else{
+      page.style.left=left+'px';
+      page.style.zoom='1';
+      page.style.transform='scale('+scale+')';
+    }
+
+    document.body.style.height=Math.ceil(page.offsetHeight*scale)+'px';
+  }
+
+  function scheduleMobileMasterScale(){
+    requestAnimationFrame(function(){
+      applyMobileMasterScale();
+      requestAnimationFrame(applyMobileMasterScale);
+    });
+  }
+
+  window.addEventListener('load',scheduleMobileMasterScale,{once:false});
+  window.addEventListener('resize',scheduleMobileMasterScale,{passive:true});
+  window.addEventListener('orientationchange',scheduleMobileMasterScale);
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(scheduleMobileMasterScale);}
+  scheduleMobileMasterScale();
+})();
+</script>
 </body>
 </html>
