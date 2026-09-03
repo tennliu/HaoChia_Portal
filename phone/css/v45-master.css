@@ -34,3 +34,12 @@ body{
   .sec-title{font-size:30px !important;}
   .doGood-links li{font-size:20px !important;}
 }
+
+/* v45.1 — P2 artwork micro-alignment on the 430px master stage.
+   Use layout offsets rather than transform so AOS zoom-in motion remains intact. */
+.diagram-wrap{
+  margin-top:22px !important; /* current 26px -> 4px upward */
+}
+.mascot-wrap .p2-mascot{
+  margin-top:-8px !important; /* current -5px -> 3px upward */
+}
