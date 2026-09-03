@@ -84,18 +84,43 @@ body.guide-active .guide-reading-overlays{
   .guide-controls{padding:5px 7px 6px;gap:5px;}
 }
 
-/* HaoChia v46.4 — desktop overlay: horizontal geometry is always viewport-wide.
-   Only the overlay HEIGHT follows viewport height. At 850px viewport height,
-   the overlay is 300px high. X-axis stays pinned to both browser edges. */
+/* HaoChia v46.5 — desktop overlays are drawn directly in viewport space.
+   The original SVGs have an intrinsic 1000×300 aspect ratio which can cap the
+   visible horizontal stretch when height is controlled independently. Desktop
+   therefore reproduces the same gradient in CSS: X always fills the viewport;
+   only Y changes with viewport height. 850px viewport height = 300px overlay. */
 @media(min-width:768px){
-  .guide-overlay{
+  .guide-reading-overlays .guide-overlay{display:none;}
+  .guide-reading-overlays::before,
+  .guide-reading-overlays::after{
+    content:"";
+    position:absolute;
     left:0;
     right:0;
-    width:100%;
-    max-width:none;
+    width:100vw;
     height:calc(100vh * 300 / 850);
-    object-fit:fill;
-    object-position:left top;
+    pointer-events:none;
   }
-  .guide-overlay-bottom{object-position:left bottom;}
+  .guide-reading-overlays::before{
+    top:0;
+    background:linear-gradient(to bottom,
+      #004ea2 0%,
+      rgba(0,78,162,.8) 10%,
+      rgba(0,78,162,.5) 30%,
+      rgba(0,78,162,.3) 50%,
+      rgba(0,78,162,.1) 70%,
+      rgba(0,78,162,0) 90%,
+      rgba(0,78,162,0) 100%);
+  }
+  .guide-reading-overlays::after{
+    bottom:0;
+    background:linear-gradient(to top,
+      #004ea2 0%,
+      rgba(0,78,162,.8) 10%,
+      rgba(0,78,162,.5) 30%,
+      rgba(0,78,162,.3) 50%,
+      rgba(0,78,162,.1) 70%,
+      rgba(0,78,162,0) 90%,
+      rgba(0,78,162,0) 100%);
+  }
 }
