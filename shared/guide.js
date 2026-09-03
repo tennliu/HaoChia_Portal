@@ -70,3 +70,40 @@
   progress?.addEventListener('pointerdown',e=>{progress.setPointerCapture?.(e.pointerId);seek(e)});progress?.addEventListener('pointermove',e=>{if(e.buttons)seek(e)});progress?.addEventListener('click',seek);
   addEventListener('wheel',userScroll,{passive:true});addEventListener('touchmove',userScroll,{passive:true});addEventListener('keydown',e=>{if(['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' '].includes(e.key))userScroll();});
 })();
+
+/* v46.8 — mobile P4 AOS assist.
+   The 430px master uses CSS zoom on narrower phones. AOS calculates trigger
+   positions from unzoomed layout coordinates, which makes deep-page items fire
+   progressively late. Use visual-viewport IntersectionObserver only for the P4
+   links/contact so their existing AOS transitions keep the same appearance but
+   start at the intended visible positions. */
+(()=>{
+  if(!window.matchMedia||!matchMedia('(max-width: 767px)').matches)return;
+  const setup=()=>{
+    const links=[...document.querySelectorAll('.doGood-links [data-aos]')];
+    const contact=document.querySelector('.sec4-contact[data-aos]');
+    const nodes=contact?[...links,contact]:links;
+    if(!nodes.length)return;
+
+    let tries=0;
+    const waitForAos=()=>{
+      if(nodes.some(el=>!el.classList.contains('aos-init'))&&tries++<80){setTimeout(waitForAos,100);return;}
+      if(!('IntersectionObserver' in window)){nodes.forEach(el=>el.classList.add('aos-animate'));return;}
+
+      const linkObserver=new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('aos-animate');linkObserver.unobserve(entry.target);}});
+      },{threshold:0,rootMargin:'0px 0px 18% 0px'});
+      links.forEach(el=>linkObserver.observe(el));
+
+      if(contact){
+        const contactObserver=new IntersectionObserver(entries=>{
+          entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('aos-animate');contactObserver.unobserve(entry.target);}});
+        },{threshold:0,rootMargin:'0px 0px 10% 0px'});
+        contactObserver.observe(contact);
+      }
+    };
+    waitForAos();
+  };
+  if(document.readyState==='complete')setup();
+  else window.addEventListener('load',setup,{once:true});
+})();
