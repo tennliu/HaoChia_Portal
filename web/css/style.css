@@ -1,0 +1,82 @@
+@font-face{font-family:"Source Han Sans TC";src:url("https://no-ttt.github.io/HaoChia/web/assets/fonts/SourceHanSansTC-Medium.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Source Han Sans TC";src:url("https://no-ttt.github.io/HaoChia/web/assets/fonts/SourceHanSansTC-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+:root{--color-blue-light:#def1fb;--color-blue:#004ea2;--color-blue-dark:#0e357f;--color-green:#009e3b;--color-white:#fff;--font-body:"Source Han Sans TC","Noto Sans TC",sans-serif;--p1-w:1480;--p1-h:1839;--p2-w:1481;--p2-h:1926;--motion-distance:18px;--motion-duration:620ms}
+*{box-sizing:border-box}html{overflow-x:hidden;scroll-behavior:auto}body{margin:0;padding:0;overflow-x:hidden;font-family:var(--font-body);color:var(--color-blue-dark);-webkit-font-smoothing:antialiased}img{max-width:100%;display:block}
+body.is-loading .page{visibility:hidden}.page-loader{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:#fff;transition:opacity .3s ease}body:not(.is-loading) .page-loader{opacity:0;pointer-events:none}.page-loader-logo{width:120px;animation:page-loader-pulse 1.2s ease-in-out infinite}@keyframes page-loader-pulse{0%,100%{opacity:.4;transform:scale(.94)}50%{opacity:1;transform:scale(1)}}
+.hover-float{transition:transform .45s cubic-bezier(.2,.7,.2,1),filter .45s ease}.hover-float:hover{transform:translateY(-4px) scale(1.015);filter:drop-shadow(0 8px 14px rgba(0,0,0,.10))}
+.section-p1{position:relative;width:100%;aspect-ratio:var(--p1-w)/2010;overflow:hidden;background:#fff}.section-p1__bg{position:absolute;top:0;left:0;width:100%;height:calc(100% * var(--p1-h)/2010);z-index:0}.section-p1__layer,.section-p2__layer{position:absolute;inset:0;width:100%;height:100%;z-index:1}.pos{position:absolute;margin:0}.logo{top:1.94%;left:44%;width:15.61%}.hero-photo-placeholder{top:12%;left:9.45%;width:40.54%;aspect-ratio:600/338.46;background:#898989;overflow:hidden}.hero-photo-placeholder video{width:100%;height:100%;object-fit:cover;display:block}.hero-text{top:30.2%;left:9.45%;width:40.1%;color:var(--color-white);font-size:1.736vw;font-weight:500;line-height:1.6;letter-spacing:.06em}.about-heading{top:50.1%;left:9.45%;color:var(--color-white);font-size:2.778vw;font-weight:700;line-height:1.08;letter-spacing:.06em;white-space:nowrap}.about-mascot{top:44.77%;left:60.81%;width:30.41%}.about-text{top:54.35%;left:9.45%;width:39.1%;color:var(--color-white);font-size:1.736vw;font-weight:500;line-height:1.6;letter-spacing:.06em}.cycle-diagram{top:72.64%;left:6.42%;width:41.22%}.cycle-heading{top:71.5%;left:52.1%;color:var(--color-blue-dark);font-size:2.778vw;font-weight:700;line-height:1.08;letter-spacing:.06em;white-space:nowrap}.cycle-text{top:75.45%;left:52.1%;width:38.4%;color:var(--color-blue-dark);font-size:1.736vw;font-weight:500;line-height:1.6;letter-spacing:.06em}
+.section-p2{position:relative;width:100%;aspect-ratio:var(--p2-w)/var(--p2-h);overflow:hidden;margin-top:-6.9%;z-index:2}.section-p2__bg{position:absolute;inset:0;width:100%;height:100%;z-index:0}.partner-heading{top:13.55%;left:9.46%;color:#fff;font-size:2.778vw;font-weight:700;line-height:1.08;letter-spacing:.06em;white-space:nowrap}.partner-text{top:17.55%;left:9.46%;width:39.2%;color:#fff;font-size:1.736vw;font-weight:500;line-height:1.6;letter-spacing:.06em}.cta-heading{top:47.9%;left:39.65%;color:#fff;font-size:3.472vw;font-weight:700;line-height:1.05;letter-spacing:.06em;white-space:nowrap}.cta-list{position:absolute;top:54.85%;left:49.8%;margin:0;padding:0;list-style:none;color:#fff;font-size:2.543vw;font-weight:500;line-height:1.05;letter-spacing:.04em}.cta-list li{margin-bottom:1.55vw}.cta-list li::before{content:"> ";font-weight:700}.qrcode{top:53.55%;left:71.2%;width:14.3%}.footer-logo{top:78.35%;left:40.51%;width:11.48%}.footer-mail-icon{top:79.6%;left:68.54%;width:2.03%}.footer-mail-text{top:80.82%;left:64.8%;color:var(--color-blue);font-size:.972vw;font-weight:700;letter-spacing:.02em;white-space:nowrap}.footer-tel-icon{top:79.1%;left:80.69%;width:2.57%}.footer-tel-text{top:80.97%;left:79.02%;color:var(--color-blue);font-size:.972vw;font-weight:700;letter-spacing:.02em;white-space:nowrap}.footer-copyright{top:92.22%;left:40.79%;color:#fff;font-size:.82vw;font-weight:500;white-space:nowrap}
+.fab{position:fixed;right:0;top:50%;transform:translateY(-50%);width:56px;height:56px;z-index:50;border:0;padding:0;background:none;cursor:pointer;filter:drop-shadow(0 4px 10px rgba(0,0,0,.20));transition:opacity .2s ease,transform .25s ease}.fab:hover{transform:translateY(-50%) translateX(-3px)}.fab img{width:100%;height:100%}.fab.hidden{opacity:0;pointer-events:none}.fab-overlay{position:fixed;inset:0;z-index:100;background:rgba(0,158,59,.82);opacity:0;pointer-events:none;transition:opacity .25s ease}.fab-overlay.open{opacity:1;pointer-events:auto}.fab-overlay-menu{position:relative;z-index:2;list-style:none;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:32px;height:100%;padding:0 48px;margin:0}.fab-overlay-menu a{font-size:32px;font-weight:700;color:#fff;letter-spacing:.04em;text-decoration:none;text-align:right}
+@media (min-width:1441px){.hero-text,.about-text,.cycle-text,.partner-text{font-size:25px}.about-heading,.cycle-heading,.partner-heading{font-size:40px}.cta-heading{font-size:50px}.cta-list{font-size:36.62px}.footer-mail-text,.footer-tel-text{font-size:14px}}
+@media (max-width:1050px) and (min-width:768px){.hero-text,.about-text,.cycle-text,.partner-text{font-size:1.78vw;line-height:1.55}.about-heading,.cycle-heading,.partner-heading{font-size:2.82vw}.cta-heading{font-size:3.35vw}.cta-list{font-size:2.4vw}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hover-float,.fab{transition:none!important}[data-aos]{transition:none!important;transform:none!important}}
+
+/* TL rebase: current content/features on engineer visual geometry */
+.cta-list a{color:inherit;text-decoration:none}.cta-list li{white-space:nowrap}.footer-mail-text{text-decoration:none}.qrcode img{width:100%;height:auto;display:block}.qrcode{display:block}.guide-source-video{transition:opacity .2s ease}
+
+/* TL v1 refinement — requested 2026-09-01; engineer geometry remains the base */
+.logo{display:none}
+.fab:hover{transform:translateY(-50%)}
+.fab{filter:drop-shadow(0 4px 10px rgba(0,0,0,.20));border:0;outline:0}
+.hero-cloud{top:17.2%;left:72.4%;width:24.1%;z-index:3;pointer-events:none}
+.about-text{top:calc(54.35% - 5px)}
+.cycle-text{top:calc(75.45% - 5px)}
+.partner-text{top:calc(17.55% - 5px)}
+.partner-cloud{top:37.9%;left:-.5%;width:43%;z-index:2;pointer-events:none}
+.partner-tagline{top:29.6%;left:9.46%;width:31.8%;z-index:3}
+.cta-heading{left:49.8%;font-size:2.55vw}
+.cta-list{top:53.55%;left:49.8%;display:flex;flex-direction:column;gap:0}
+.cta-list li{display:flex;align-items:center;gap:.85vw;margin-bottom:1.55vw}
+.cta-list li::before{content:none}
+.cta-arrow{width:1.55vw;max-width:23px;min-width:14px;flex:0 0 auto}
+.footer-copyright{font-size:.972vw;font-weight:700;letter-spacing:.02em;color:#fff}
+@media (min-width:1441px){.cta-heading{font-size:36.7px}.footer-copyright{font-size:14px}}
+
+
+/* TL asset alignment pass — 2026-09-01 */
+/* Keep the new p2 artwork at its original proportion, shift it upward 100px,
+   and let the section's dark-blue base safely fill the final lower edge. */
+.section-p2{background:var(--color-blue-dark)}
+.section-p2__bg{top:-100px;bottom:auto;height:auto}
+
+/* Asset 46: enlarge the complete Efficient + runner artwork by ~20%. */
+.about-mascot{width:36.49%}
+
+/* First narrative block: ~10% lower than the previous 30.2% anchor. */
+.hero-text{top:33.2%}
+
+/* Cloud edge-entry states. Their final state is exactly flush to the viewport edge. */
+.hero-cloud{
+  left:auto;right:0;
+  transform:translateX(50px);
+  transition:transform 720ms cubic-bezier(.42,0,1,1);
+  will-change:transform;
+}
+.partner-cloud{
+  left:0;
+  top:calc(37.9% - 100px);
+  transform:translateX(-50px);
+  transition:transform 720ms cubic-bezier(.42,0,1,1);
+  will-change:transform;
+}
+.hero-cloud.cloud-in,.partner-cloud.cloud-in{transform:translateX(0)}
+@media (prefers-reduced-motion:reduce){
+  .hero-cloud,.partner-cloud{transform:none!important;transition:none!important}
+}
+
+
+/* TL asset alignment pass v3 — requested update */
+/* 1 & 6: asset45 comes down 50px from the previous -100px offset; asset31 follows it. */
+.section-p2__bg{top:-50px}
+.partner-cloud{top:calc(37.9% - 50px)}
+
+/* 2: Efficient artwork 20px left from its current anchor. */
+.about-mascot{left:calc(60.81% - 20px)}
+
+/* 3: first paragraph 10px up from the previous pass. */
+.hero-text{top:calc(33.2% - 10px)}
+
+/* 4–5: faster edge-entry cloud motion. */
+.hero-cloud,.partner-cloud{
+  transition:transform 280ms cubic-bezier(.42,0,1,1);
+}
