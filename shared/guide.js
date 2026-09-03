@@ -30,9 +30,9 @@
     if(!el)return scrollY;
     const docTop=scrollY+el.getBoundingClientRect().top;
     let land=Number.isFinite(cue.land)?cue.land:(cfg.defaultLand||.16);
-    /* v46.2: on mobile, place the resource-cycle heading around one-fifth
-       of the viewport height from the top. */
-    if(cue.target==='cycle'&&Math.max(document.documentElement.clientWidth||0,innerWidth||0)<768)land=.20;
+    /* v46.3: on mobile, align the resource-cycle heading near the screenshot
+       reference position, roughly twelve percent down from the viewport top. */
+    if(cue.target==='cycle'&&Math.max(document.documentElement.clientWidth||0,innerWidth||0)<768)land=.12;
     return Math.max(0,Math.min(docTop-innerHeight*land,maxScroll()));
   }
   function scrollToGuide(y,duration){
