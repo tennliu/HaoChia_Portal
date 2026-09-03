@@ -2,7 +2,7 @@
 (()=>{
   const $=(s,r=document)=>r.querySelector(s);
   const cfg=window.HAOCHIA_GUIDE_CONFIG||{};
-  const video=$('#guideVideo'), launcher=$('.guide-launch'), panel=$('.guide-player');
+  const video=$('#guideVideo'), launcher=$('.guide-launch'), panel=$('.guide-player'), sourceVideos=[...document.querySelectorAll('.guide-source-video')];
   const title=$('#guideTitle'), play=$('.guide-play'), followBtn=$('.guide-follow'), restart=$('.guide-restart'), loopBtn=$('.guide-loop'), close=$('.guide-close');
   const progress=$('.guide-progress'), fill=$('.guide-progress i');
   if(!video||!launcher||!panel)return;
@@ -54,7 +54,7 @@
   }
   function resume(){follow=true;showFollow(false);const cue=cues[cueIndex(video.currentTime||0)];if(cue)land(cue);}
   function userScroll(){if(!open||performance.now()<programmaticUntil)return;follow=false;showFollow(true);}
-  function openGuide(){open=true;follow=true;active=-1;showFollow(false);document.body.classList.add('guide-active');panel.classList.add('is-open');panel.setAttribute('aria-hidden','false');launcher.style.opacity='0';launcher.style.pointerEvents='none';video.currentTime=0;video.muted=false;video.volume=1;sync({force:true});video.play().then(()=>sync({force:true})).catch(()=>{if(play)play.textContent='播放';});}
+  function openGuide(){open=true;follow=true;active=-1;showFollow(false);sourceVideos.forEach(v=>{v.muted=true;v.play().catch(()=>{});});document.body.classList.add('guide-active');panel.classList.add('is-open');panel.setAttribute('aria-hidden','false');launcher.style.opacity='0';launcher.style.pointerEvents='none';video.currentTime=0;video.muted=false;video.volume=1;sync({force:true});video.play().then(()=>sync({force:true})).catch(()=>{if(play)play.textContent='播放';});}
   function closeGuide(){open=false;follow=true;active=-1;video.pause();document.body.classList.remove('guide-active');panel.classList.remove('is-open');panel.setAttribute('aria-hidden','true');launcher.style.opacity='1';launcher.style.pointerEvents='auto';showFollow(false);}
   launcher.addEventListener('click',openGuide);close?.addEventListener('click',closeGuide);
   play?.addEventListener('click',()=>{if(video.paused){resume();video.play().catch(()=>{});}else video.pause();setTimeout(()=>sync({seek:true}),40);});
@@ -62,7 +62,7 @@
   restart?.addEventListener('click',()=>{follow=true;showFollow(false);video.currentTime=0;active=-1;sync({force:true});video.play().catch(()=>{});});
   loopBtn?.addEventListener('click',()=>{loop=!loop;loopBtn.setAttribute('aria-pressed',String(loop));loopBtn.classList.toggle('is-active',loop);});
   video.addEventListener('timeupdate',()=>sync()); video.addEventListener('seeking',()=>sync({force:true,seek:true})); video.addEventListener('play',()=>sync({seek:true})); video.addEventListener('pause',()=>sync());
-  video.addEventListener('ended',()=>{if(loop){follow=true;showFollow(false);active=-1;scrollToGuide(0,900);setTimeout(()=>{if(!open)return;video.currentTime=0;sync({force:true});video.play().catch(()=>{});},920);}else{if(title)title.textContent='導讀完成';if(play)play.textContent='重新播放';}});
+  video.addEventListener('ended',()=>{if(loop){follow=true;showFollow(false);active=-1;const firstCue=cues[0];scrollToGuide(firstCue?targetY(firstCue):0,900);setTimeout(()=>{if(!open)return;video.currentTime=0;sync({force:true});video.play().catch(()=>{});},920);}else{if(title)title.textContent='導讀完成';if(play)play.textContent='重新播放';}});
   function seek(e){if(!Number.isFinite(video.duration)||video.duration<=0)return;const r=progress.getBoundingClientRect();const ratio=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));video.currentTime=ratio*video.duration;active=-1;sync({force:true,seek:true});}
   progress?.addEventListener('pointerdown',e=>{progress.setPointerCapture?.(e.pointerId);seek(e)});progress?.addEventListener('pointermove',e=>{if(e.buttons)seek(e)});progress?.addEventListener('click',seek);
   addEventListener('wheel',userScroll,{passive:true});addEventListener('touchmove',userScroll,{passive:true});addEventListener('keydown',e=>{if(['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' '].includes(e.key))userScroll();});
