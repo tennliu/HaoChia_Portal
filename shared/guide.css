@@ -83,3 +83,14 @@ body.guide-active .guide-reading-overlays{
   .guide-close{width:28px;height:28px;font-size:19px;}
   .guide-controls{padding:5px 7px 6px;gap:5px;}
 }
+
+/* HaoChia v46.1 — desktop guide overlay height follows viewport height.
+   850px viewport height is the visual master: 300px overlay height.
+   300 / 850 = 35.29411765vh. Mobile keeps the existing width-driven artwork. */
+@media(min-width:768px){
+  .guide-overlay{
+    width:100vw;
+    height:35.29411765vh;
+    object-fit:fill;
+  }
+}
