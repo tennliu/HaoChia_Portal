@@ -23,3 +23,10 @@
     letter-spacing:.055em !important;
   }
 }
+
+/* HaoChia v44.2 — iPhone 12 / 390px viewport position tuning. */
+@media (min-width:380px) and (max-width:400px){
+  .sec1-hero .sec1-copy{
+    top:45.5% !important;
+  }
+}
