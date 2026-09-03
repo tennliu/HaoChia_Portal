@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8"/>
@@ -7,7 +6,7 @@
 <title>智慧好嘉 HAOCHIA — TL Rebase</title>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
 <link href="css/style.css" rel="stylesheet"/>
-<link href="css/v44-fix.css" rel="stylesheet"/>
+<link href="css/v44-2-fix.css" rel="stylesheet"/>
 <link href="../shared/guide.css" rel="stylesheet"/>
 </head>
 <body class="is-loading">
@@ -66,11 +65,7 @@ function check(){pending--;if(pending<=0)revealAndInit()}setTimeout(revealAndIni
 function initCloudSlides(){
   var heroCloud=document.querySelector('.sec1-cloud');
   var sec3Cloud=document.querySelector('.sec3-cloud');
-  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    if(heroCloud)heroCloud.classList.add('cloud-in');
-    if(sec3Cloud)sec3Cloud.classList.add('cloud-in');
-    return;
-  }
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){if(heroCloud)heroCloud.classList.add('cloud-in');if(sec3Cloud)sec3Cloud.classList.add('cloud-in');return;}
   if(heroCloud)requestAnimationFrame(function(){requestAnimationFrame(function(){heroCloud.classList.add('cloud-in');});});
   if(!sec3Cloud)return;
   if(!('IntersectionObserver' in window)){sec3Cloud.classList.add('cloud-in');return;}
@@ -80,46 +75,8 @@ function initCloudSlides(){
 function revealAndInit(){revealPage();requestAnimationFrame(initCloudSlides);}
 if(pending===0)revealAndInit();else{imgs.forEach(function(img){if(img.complete)check();else{img.addEventListener('load',check,{once:true});img.addEventListener('error',check,{once:true})}});videos.forEach(function(v){if(v.readyState>=3)check();else{v.addEventListener('canplay',check,{once:true});v.addEventListener('error',check,{once:true})}})}
 </script>
-
-
 <div id="guide-ui"><div class="guide-reading-overlays" aria-hidden="true"><img class="guide-overlay guide-overlay-top" src="../shared/assets/guide-overlay-top.svg" alt=""/><img class="guide-overlay guide-overlay-bottom" src="../shared/assets/guide-overlay-bottom.svg" alt=""/></div><button class="guide-launch" type="button"><span>▶</span><b>好嘉帶你讀</b></button><aside aria-hidden="true" class="guide-player"><div class="guide-video-wrap"><video id="guideVideo" playsinline="" poster="../shared/assets/haochia-wip-poster.jpg" preload="metadata"><source src="../shared/assets/haochia-wip.mp4" type="video/mp4"/></video></div><div class="guide-meta"><div><small>HAOCHIA GUIDE</small><strong id="guideTitle">智慧好嘉</strong></div><button aria-label="關閉" class="guide-close" type="button">×</button></div><div class="guide-caption" id="guideCaption"></div><div aria-label="導讀進度" class="guide-progress" role="slider"><i></i></div><div class="guide-controls"><button class="guide-play" type="button">暫停</button><button class="guide-follow" hidden="" type="button">▶ 繼續跟著好嘉導覽</button><button class="guide-restart" type="button">重新播放</button><button aria-pressed="false" class="guide-loop" type="button">循環播放</button></div></aside></div><script>window.HAOCHIA_GUIDE_CONFIG={defaultLand:.25,cues:[{t:0,target:"intro",land:.25,title:"智慧好嘉・循環生態系"},{t:9,target:"smart",land:.25,title:"智慧牧場・精準餵養"},{t:37,target:"cycle",land:.25,title:"資源循環・農牧共好"},{t:63,target:"partner",land:.25,title:"永續共好的推行者"},{t:75,target:"cta",land:.25,title:"關注智慧好嘉"}],targets:{intro:".sec1-copy",smart:"#smart-farm .sec-title",cycle:"#cycle .sec-title",partner:"#sustainability .sec-title",cta:"#action .sec4-illustration",footer:"#footer"}};</script><script src="../shared/guide.js"></script>
-<script>
-(function(){
-  var mq=window.matchMedia('(min-width: 768px)');
-  function syncView(e){if((e.matches!==undefined?e.matches:mq.matches)){window.location.replace('../web/index.html'+window.location.search+window.location.hash);}}
-  if(mq.matches) syncView(mq);
-  if(mq.addEventListener) mq.addEventListener('change',syncView); else mq.addListener(syncView);
-})();
-</script>
-
-<script>
-(function(){
-  var DESIGN_WIDTH = 430;
-  var page = document.querySelector('.page');
-  if(!page) return;
-  function applyMobileScale(){
-    var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-    if(vw <= DESIGN_WIDTH){
-      var scale = vw / DESIGN_WIDTH;
-      page.style.width = DESIGN_WIDTH + 'px';
-      page.style.maxWidth = 'none';
-      page.style.transformOrigin = 'top center';
-      page.style.transform = 'scale(' + scale + ')';
-      document.body.style.minHeight = (page.scrollHeight * scale) + 'px';
-    }else{
-      page.style.width = '';
-      page.style.maxWidth = '';
-      page.style.transformOrigin = '';
-      page.style.transform = '';
-      document.body.style.minHeight = '';
-    }
-  }
-  window.addEventListener('load', applyMobileScale, {once:false});
-  window.addEventListener('resize', applyMobileScale);
-  window.addEventListener('orientationchange', applyMobileScale);
-  requestAnimationFrame(applyMobileScale);
-})();
-</script>
-
+<script>(function(){var mq=window.matchMedia('(min-width: 768px)');function syncView(e){if((e.matches!==undefined?e.matches:mq.matches)){window.location.replace('../web/index.html'+window.location.search+window.location.hash);}}if(mq.matches)syncView(mq);if(mq.addEventListener)mq.addEventListener('change',syncView);else mq.addListener(syncView);})();</script>
+<script>(function(){var DESIGN_WIDTH=430;var page=document.querySelector('.page');if(!page)return;function applyMobileScale(){var vw=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);if(vw<=DESIGN_WIDTH){var scale=vw/DESIGN_WIDTH;page.style.width=DESIGN_WIDTH+'px';page.style.maxWidth='none';page.style.transformOrigin='top center';page.style.transform='scale('+scale+')';document.body.style.minHeight=(page.scrollHeight*scale)+'px';}else{page.style.width='';page.style.maxWidth='';page.style.transformOrigin='';page.style.transform='';document.body.style.minHeight='';}}window.addEventListener('load',applyMobileScale,{once:false});window.addEventListener('resize',applyMobileScale);window.addEventListener('orientationchange',applyMobileScale);requestAnimationFrame(applyMobileScale);})();</script>
 </body>
 </html>
