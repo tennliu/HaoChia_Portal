@@ -7,7 +7,7 @@
 <title>智慧好嘉 HAOCHIA — TL Rebase</title>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
 <link href="css/style.css" rel="stylesheet"/>
-<link href="../shared/guide.css" rel="stylesheet"/>
+<link href="../shared/guide-v46-6.css" rel="stylesheet"/>
 </head>
 <body class="is-loading">
 <div class="page-loader" id="pageLoader">
@@ -104,15 +104,8 @@
           return;
         }
 
-        /* Engineer-style behavior:
-           the AOS wrapper handles the first fade/slide into view; after that,
-           the cloud itself keeps travelling in direct response to page scroll.
-           Scrolling upward naturally reverses the motion. */
-
         if(hero&&heroSection){
           var r1=heroSection.getBoundingClientRect();
-          /* Top section: begin farther outside the right edge and drift left
-             as the user moves through the opening section. */
           var travel1=Math.max(1,Math.min(vh*.78,r1.height*.34));
           var p1=smoothstep(clamp((-r1.top)/travel1,0,1));
           var x1=mix(10.42,2.48,p1);
@@ -121,9 +114,6 @@
 
         if(partner&&partnerWrap){
           var r2=partnerWrap.getBoundingClientRect();
-          /* asset31: bind progress to the cloud's own viewport travel rather
-             than section-p2's top edge. This keeps the parallax active while
-             the cloud itself is actually entering and crossing the screen. */
           var startLine=vh*1.02;
           var endLine=vh*.18;
           var travel2=Math.max(1,startLine-endLine);
@@ -153,7 +143,6 @@
     }
   </script>
 
-
 <div id="guide-ui"><div class="guide-reading-overlays" aria-hidden="true"><img class="guide-overlay guide-overlay-top" src="../shared/assets/guide-overlay-top.svg" alt=""/><img class="guide-overlay guide-overlay-bottom" src="../shared/assets/guide-overlay-bottom.svg" alt=""/></div><button class="guide-launch" type="button"><span>▶</span><b>好嘉帶你讀</b></button><aside aria-hidden="true" class="guide-player"><div class="guide-video-wrap"><video id="guideVideo" playsinline="" poster="../shared/assets/haochia-wip-poster.jpg" preload="metadata"><source src="../shared/assets/haochia-wip.mp4" type="video/mp4"/></video></div><div class="guide-meta"><div><small>HAOCHIA GUIDE</small><strong id="guideTitle">智慧好嘉</strong></div><button aria-label="關閉" class="guide-close" type="button">×</button></div><div class="guide-caption" id="guideCaption"></div><div aria-label="導讀進度" class="guide-progress" role="slider"><i></i></div><div class="guide-controls"><button class="guide-play" type="button">暫停</button><button class="guide-follow" hidden="" type="button">▶ 繼續跟著好嘉導覽</button><button class="guide-restart" type="button">重新播放</button><button aria-pressed="false" class="guide-loop" type="button">循環播放</button></div></aside></div><script>window.HAOCHIA_GUIDE_CONFIG={defaultLand:.16,cues:[{t:0,target:"intro",title:"智慧好嘉・循環生態系"},{t:9,target:"smart",title:"智慧牧場・精準餵養"},{t:37,target:"cycle",land:.33,title:"資源循環・農牧串聯"},{t:63,target:"partner",land:.48,title:"永續共好的推行者"},{t:75,target:"cta",land:.33,title:"關注智慧好嘉"}],targets:{intro:".hero-text",smart:".about-heading",cycle:".cycle-heading",partner:".partner-heading",cta:".cta-heading",footer:"#footer"},groups:{intro:[".hero-text"],smart:[".about-heading",".about-text"],partner:[".partner-heading",".partner-text"],footer:[".footer-logo-clone",".footer-mail-text"]},readingOffsets:{cycle:-140}};</script><script src="../shared/guide.js"></script>
 <script>
 (function(){
@@ -175,20 +164,12 @@
     var scale=vw/DESIGN_WIDTH;
     page.style.setProperty('--desktop-scale',String(scale));
 
-    /* Prefer layout-level zoom so vector artwork and HTML text are rendered
-       at the final display scale instead of rasterizing the entire 1000px page
-       as one transformed compositing layer. */
     if(window.CSS && CSS.supports && CSS.supports('zoom','1')){
-      /* With CSS zoom, the element's left offset is zoomed too.
-         Keep the master stage anchored at x=0 so its zoomed 1000px width
-         exactly equals the viewport width. */
       page.style.left='0';
       page.style.transformOrigin='top left';
       page.style.zoom=String(scale);
       page.style.transform='none';
     }else{
-      /* Compatibility fallback for older browsers: retain the original
-         centered transform-scale behavior. */
       page.style.zoom='1';
       page.style.left='calc((100vw - 1000px)/2)';
       page.style.transformOrigin='top center';
