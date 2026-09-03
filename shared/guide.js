@@ -29,7 +29,10 @@
     const sel=cfg.targets&&cfg.targets[cue.target], el=sel?$(sel):null;
     if(!el)return scrollY;
     const docTop=scrollY+el.getBoundingClientRect().top;
-    const land=Number.isFinite(cue.land)?cue.land:(cfg.defaultLand||.16);
+    let land=Number.isFinite(cue.land)?cue.land:(cfg.defaultLand||.16);
+    /* v46.1: on mobile, raise the resource-cycle heading slightly so its
+       visual landing sits around the upper quarter of the viewport. */
+    if(cue.target==='cycle'&&Math.max(document.documentElement.clientWidth||0,innerWidth||0)<768)land=.22;
     return Math.max(0,Math.min(docTop-innerHeight*land,maxScroll()));
   }
   function scrollToGuide(y,duration){
